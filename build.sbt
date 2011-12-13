@@ -13,8 +13,6 @@ scalaSource in Compile <<= baseDirectory / "src"
 
 scalaSource in Test <<= baseDirectory / "specs"
 
-seq(com.github.retronym.SbtOneJar.oneJarSettings: _*)
-
 
 // Scala
 
@@ -24,8 +22,6 @@ scalacOptions ++= Seq("-deprecation", "-unchecked")
 
 
 // Managed libraries
-
-//resolvers ++= Seq()
 
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "1.6.1" % "test"

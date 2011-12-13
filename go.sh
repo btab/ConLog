@@ -15,7 +15,7 @@ case $1 in
     $sbt_command library-dependencies | grep List;;
     
   p | package)
-    $sbt_command update one-jar;;
+    $sbt_command update package;;
     
   r | run)
     $sbt_command update run;;
