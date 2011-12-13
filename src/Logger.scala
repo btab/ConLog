@@ -2,11 +2,11 @@ package com.bluetheta.conlog
 
 import scala.collection.mutable.Publisher
 
-object LogLevels {
-  val all = Set('debug, 'error, 'fatal, 'info, 'warn)
+object Logger {
+  val levels = Set('debug, 'error, 'fatal, 'info, 'warn)
 }
 
-class Log extends Publisher[LogEvent] {
+class Logger extends Publisher[LogEvent] {
   var ctx: LogContext = RootContext
   
   def popContext(summary: String) =

@@ -8,7 +8,7 @@ object SimpleLogReporter {
   val symbolsByLevel = Map('debug -> "+", 'error -> "*", 'fatal -> "!", 'info -> "-", 'warn -> "~")
 }
 
-case class SimpleLogReporter(_out: OutputStream, _levels: Set[Symbol] = LogLevels.all) extends LogSubscriber {
+case class SimpleLogReporter(_out: OutputStream, _levels: Set[Symbol] = Logger.levels) extends LogSubscriber {
   val out = new PrintStream(_out)
   val levels = _levels ++ Set('contextPush, 'contextPop)
   
@@ -17,7 +17,7 @@ case class SimpleLogReporter(_out: OutputStream, _levels: Set[Symbol] = LogLevel
   var ctx = RootContext
   var indent = ""
   
-  def notify(log: Log, event: LogEvent) = if (levels.contains(event.level)) {
+  def notify(log: Logger, event: LogEvent) = if (levels.contains(event.level)) {
     val msg = (if (event.loc == Nowhere) "" else event.location + " => ") + event.msg
     
     val report = event.level match {
