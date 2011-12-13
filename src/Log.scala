@@ -2,20 +2,24 @@ package com.bluetheta.conlog
 
 import scala.collection.mutable.Publisher
 
+object LogLevels {
+  val all = Set('debug, 'error, 'fatal, 'info, 'warn)
+}
+
 class Log extends Publisher[LogEvent] {
   var ctx: LogContext = RootContext
   
-  def popContext = 
+  def popContext(summary: String) =
     if (ctx == RootContext)
       throw new Exception("already at root context")
     else { 
       ctx = ctx.parent
-      log('context, "", ctx, Nowhere)
+      log('contextPop, summary, ctx, Nowhere);
     }
     
   def pushContext(name: String) = {
     ctx = LogContext(name, ctx)
-    log('context, "", ctx, Nowhere)
+    log('contextPush, "", ctx, Nowhere)
   }
   
   private def log(level: Symbol, msg: String, ctx: LogContext, loc: LogLocator) = {
