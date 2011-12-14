@@ -9,7 +9,7 @@ object Logger {
 class Logger extends Publisher[LogEvent] {
   var ctx: LogContext = RootContext
   
-  def popContext(summary: String) =
+  def popContext(summary: String = "") =
     if (ctx == RootContext)
       throw new Exception("already at root context")
     else { 
