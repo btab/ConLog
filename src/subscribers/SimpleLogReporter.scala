@@ -9,13 +9,13 @@ object SimpleLogReporter {
 }
 
 case class SimpleLogReporter(_out: OutputStream, _levels: Set[Symbol] = Logger.levels) extends LogSubscriber {
-  val out = new PrintStream(_out)
-  val levels = _levels ++ Set('contextPush, 'contextPop)
+  private val out = new PrintStream(_out)
+  private val levels = _levels ++ Set('contextPush, 'contextPop)
   
   def close = out.close
   
-  var ctx = RootContext
-  var indent = ""
+  private var ctx = RootContext
+  private var indent = ""
   
   def notify(log: Logger, event: LogEvent) = if (levels.contains(event.level)) {
     val msg = (if (event.loc == Nowhere) "" else event.location + " => ") + event.msg
