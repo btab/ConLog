@@ -11,7 +11,7 @@ class Logger extends Publisher[LogEvent] {
   
   def popContext(summary: String = "") =
     if (ctx == RootContext)
-      throw new Exception("already at root context")
+      throw new NoSuchElementException("already at root context")
     else { 
       ctx = ctx.parent
       log('contextPop, summary, ctx, Nowhere);
