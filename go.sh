@@ -14,8 +14,8 @@ case $1 in
   l | libraries)
     $sbt_command library-dependencies | grep List;;
     
-  p | package)
-    $sbt_command update package;;
+  p | publish)
+    $sbt_command update publish;;
     
   r | run)
     $sbt_command update run;;
@@ -24,5 +24,5 @@ case $1 in
     $sbt_command;;
     
   *)
-    echo "specify a command: (c)onsole, (d)evloop, (l)ibraries, (p)ackage, (r)un, (s)bt";;
+    echo "specify a command: (c)onsole, (d)evloop, (l)ibraries, (p)ublish, (r)un, (s)bt";;
 esac

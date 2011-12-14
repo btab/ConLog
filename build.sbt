@@ -4,7 +4,7 @@ name := "conlog"
 
 organization := "com.bluetheta"
 
-version := "1.0"
+version := "1.1"
 
 
 // SBT
