@@ -1,7 +1,25 @@
 ConLog
 ======
 
-A simple, contextual logging framework for Scala that can be used as follows.
+A simple, contextual logging framework for Scala.
+
+SBT Inclusion
+-------------
+
+The maven repo is part of the git repo so, thanks to github's raw URL support, you can point SBT at...
+
+```scala
+resolvers ++= Seq("Conlog Repository" at "https://raw.github.com/btab/ConLog/master/repo")
+```
+
+It's then a simple matter of adding the dependency (note the %% as this project follows the artifact naming convention of including the scala version against which it was compiled)...
+
+```scala
+libraryDependencies ++= Seq("com.bluetheta" %% "conlog" % "1.0")
+```
+
+Usage
+-----
 
 Create a global logging object (probably in some root package of your project that's imported a lot to save on extra import statements)...
 
