@@ -1,12 +1,12 @@
 package com.bluetheta.conlog
 
-import scala.collection.mutable.Publisher
+import scala.collection.mutable.{ArrayBuffer => MSeq}
 
 object Logger {
   val levels = Set('debug, 'error, 'fatal, 'info, 'warn)
 }
 
-class Logger extends Publisher[LogEvent] {
+class Logger {
   var ctx: LogContext = RootContext
   
   def popContext(summary: String = "") =
@@ -22,9 +22,12 @@ class Logger extends Publisher[LogEvent] {
     log('contextPush, "", ctx, Nowhere)
   }
   
-  private def log(level: Symbol, msg: String, ctx: LogContext, loc: LogLocator) = {
+  private val subscribers = MSeq[LogSubscriber]()
+  def subscribe(sub: LogSubscriber) = subscribers += sub
+  def publish(event: LogEvent) = subscribers.foreach(_.notify(this, event))
+  
+  private def log(level: Symbol, msg: String, ctx: LogContext, loc: LogLocator) =
     publish(LogEvent(level, msg, ctx, loc))
-  }
   
   def debug(msg: String) = log('debug, msg, ctx, Nowhere)
   def error(msg: String) = log('error, msg, ctx, Nowhere)
