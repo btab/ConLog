@@ -1,0 +1,53 @@
+ConLog
+======
+
+A simple, contextual logging framework for Scala that can be used as follows.
+
+Create a global logging object (probably in some root package of your project that's imported a lot to save on extra import statements)...
+
+```scala
+object Log extends com.bluetheta.conlog.Logger
+```
+
+Wire up one or more subscribers (otherwise logging will be a no-op)...
+
+```scala
+object Application extends App {
+  Log.subscribe(SimpleLogReporter(System.out))
+}
+```
+
+Log something...
+
+```scala
+Log.debug("memory usage at 20%")
+Log.error("bad request")
+Log.fatal("CPU overheat")
+Log.info("processed 20/200 files")
+Log.warn("option 3 is deprecated")
+```
+
+Provide a locator object. This concept emerged from the idea of parsing files and wanting to log a problem together with the location in the parsed file it occurredin. So for example...
+
+```scala
+case class SourceFileLine(line: String, lineNum: Int, file: File) extends com.bluetheta.conlog.LogLocator {
+  def location = file.getPath + ":" + lineNum
+}
+
+val line = SourceFileLine(rawLine, 22, file)
+Log.error("unable to parse declaration", line)
+```
+
+Log within a context. If a fullblown workflow engine is overkill for your project, this feature provides a non-threadsafe mechanism to place the global logger in a nestable context. It allows for logging as though the workflow of your application were divided up into tasks and sub-tasks without the rigour of actually doing so...
+
+```scala
+// we start in the RootContext
+Log.pushContext("Scanning images") // ctx 1
+// all logging here will have ctx 1
+Log.pushContext("Scanning JPEGs")  // ctx2
+// all logging here will have ctx 2 (inside ctx 1)
+Log.popContext("59 JPEGs")         // exiting ctx2 with a summary
+Log.popContext                     // exiting ctx1 with no summary
+Log.popContext                     // will throw an error
+```
+
