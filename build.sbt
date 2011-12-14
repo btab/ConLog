@@ -1,8 +1,8 @@
 // Project
 
-name := "Conlog"
+name := "conlog"
 
-organization := "BlueTheta"
+organization := "com.bluetheta"
 
 version := "1.0"
 
@@ -12,6 +12,8 @@ version := "1.0"
 scalaSource in Compile <<= baseDirectory / "src"
 
 scalaSource in Test <<= baseDirectory / "specs"
+
+publishTo := Some(Resolver.file("Git Repo", file("repo")))
 
 
 // Scala
