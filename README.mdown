@@ -27,7 +27,7 @@ Log.info("processed 20/200 files")
 Log.warn("option 3 is deprecated")
 ```
 
-Provide a locator object. This concept emerged from the idea of parsing files and wanting to log a problem together with the location in the parsed file it occurredin. So for example...
+Provide a locator object. This concept emerged from the idea of parsing files and wanting to log a problem together with the location in the parsed file it occurred in. So for example...
 
 ```scala
 case class SourceFileLine(line: String, lineNum: Int, file: File) extends com.bluetheta.conlog.LogLocator {
