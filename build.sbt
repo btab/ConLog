@@ -13,6 +13,12 @@ scalaSource in Compile <<= baseDirectory / "src"
 
 scalaSource in Test <<= baseDirectory / "specs"
 
+publishArtifact in Compile := false
+
+publishArtifact in (Compile, packageBin) := true
+
+publishArtifact in Test := false
+
 publishTo := Some(Resolver.file("Git Repo", file("repo")))
 
 
