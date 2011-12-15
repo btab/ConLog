@@ -26,7 +26,7 @@ case class SimpleLogReporter(_out: OutputStream, _levels: Set[Symbol] = Logger.l
     }
     
     if (report.nonEmpty) out.println(indent + report)
-        
+    
     if (event.level == 'contextPush) indent += " "
     else if (event.level == 'contextPop) indent = indent.slice(0, indent.size - 1)
   }
