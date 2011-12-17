@@ -15,7 +15,7 @@ resolvers ++= Seq("Conlog Repository" at "https://raw.github.com/btab/ConLog/mas
 It's then a simple matter of adding the dependency (note the %% as this project follows the artifact naming convention of including the scala version against which it was compiled)...
 
 ```scala
-libraryDependencies ++= Seq("com.bluetheta" %% "conlog" % "1.1")
+libraryDependencies ++= Seq("com.bluetheta" %% "conlog" % "1.2")
 ```
 
 Usage
