@@ -22,7 +22,7 @@ case class SimpleLogReporter(_out: OutputStream, _levels: Set[Symbol] = Logger.l
     val report = event.level match {
       case 'contextPop  => if (event.msg.isEmpty) "" else "> " + msg
       case 'contextPush => event.ctx.name
-      case _            => SimpleLogReporter.symbolsByLevel(event.level) + " " + event.msg
+      case _            => SimpleLogReporter.symbolsByLevel(event.level) + " " + msg
     }
     
     if (report.nonEmpty) out.println(indent + report)

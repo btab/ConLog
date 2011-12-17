@@ -40,7 +40,7 @@ scanning
  ! xxxxxx
  > scan completed succcessfully
 assessing
- * file 12 has problems
+ * files/file12:22 => file 12 has problems
 """
       output() should equal (expectedOutput)
     }
