@@ -24,7 +24,7 @@ publishTo := Some(Resolver.file("Git Repo", file("repo")))
 
 // Scala
 
-scalaVersion := "2.9.1"
+scalaVersion := "2.9.2"
 
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
